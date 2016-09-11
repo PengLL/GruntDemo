@@ -1,0 +1,17 @@
+h2
+{
+    font-size: 18px;
+
+    float: left;
+
+    height: 66;
+    margin-top: 10px;
+    padding-left: 48px;
+}
+.nav2
+{
+    overflow: hidden;
+
+    width: 80px;
+    height: 90px;
+}
