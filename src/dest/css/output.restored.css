@@ -27,3 +27,7 @@ div
 
     background-color: #000;
 }
+div.demo
+{
+    float: left;
+}
