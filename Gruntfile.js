@@ -1,21 +1,18 @@
+
+/*
+ 使用说明：
+ 1.build的files里相对路径是相对项目的根目录用户可根据实际情况进行更改
+ 2.需要增加对JS/css文件时，只需在build的files中添加对应的源文件和目标文件的路径即可
+ 3.如果需要对每个插件做更精确的控制，请自行查询具体做法，此处不做阐述了
+ PS：使用哪几个插件，就在哪几个插件的build的files中添加文件路径(example:csscomb插件)
+*/
 // 包装函数
 module.exports=function(grunt){
 	// 任务配置，所有插件的配置信息
 	grunt.initConfig({
 		//获取package.json的信息
 		pkg:grunt.file.readJSON("package.json"),
-		// uglify插件配置信息
-		uglify: {
-	      options: {
-	      	stripBanners:true,
-	        banner: '/*! <%= pkg.name %>-<%=pkg.version%>.js <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-	      },
-	      build: {
-	        src: 'src/js/test.js',
-	        dest: 'build/js/<%= pkg.name %>-<%=pkg.version%>.min.js'
-	      }
-    	},
-    	// jshint插件配置信息
+		// jshint插件配置信息
     	jshint:{
     		options:{
     			jshintrc:'.jshintrc'
@@ -30,6 +27,19 @@ module.exports=function(grunt){
     			options:{spawn:false}
     		}
     	},
+		// uglify插件配置信息
+		uglify: {
+	      options: {
+	      	stripBanners:true,
+	        banner: '/*! <%= pkg.name %>-<%=pkg.version%>.js <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+	      },
+	      build: {
+	      	files:{
+	      		'build/js/yourName.min.js':['src/js/test.js']
+	      	} 
+	      }
+    	},
+    	
     	// cssmin插件配置信息
     	cssmin:{
     		options: {
@@ -44,12 +54,11 @@ module.exports=function(grunt){
     	},
     	// csscomb插件配置信息
     	csscomb: {
-        	dynamic_mappings: {
-	            expand: true,
-	            cwd: 'src/css/',
-	            src: ['*.css', '!*.resorted.css'],
-	            dest: 'src/dest/css/',
-	            ext: '.resorted.css'
+        	bulid: {
+	            files:{
+	            	"src/dest/css/output.restored.css":["src/css/test.css"],
+	            	"src/dest/css/output2.restored.css":["src/css/test2.css"]
+	            }
 	        }
     	}
 	});
